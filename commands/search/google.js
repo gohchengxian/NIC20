@@ -4,9 +4,11 @@ const cheerio = require("cheerio");
 const db = require("quick.db");
 
 async function nsfwcheck(title, description, url, bot) {
+  var nsfwwdd = await db.get(`NSFW_WEBSITE`);
+  if(!nsfwwdd) var nsfwwdd = [];
   var nsfw_words = ["porn", "gayporn", "a片", "性愛","做愛","內射","成人电影","成人视频","sex","hentai","av","免费成人高清在线视频"];
   var nsfw_word = ["porn", "gayporn", "a片", "性愛","做愛","內射","成人电影","成人视频","sex","hentai","免费成人高清在线视频","成人影片"];
-  var ban_link = await db.get(`NSFW_WEBSITE`);
+  var ban_link = nsfwwdd;
   var white_list = ['https://zh.wikipedia.org/','https://wikipedia.org/'];
   var whitelistttt = [];
   white_list.forEach(xdd => {
@@ -74,7 +76,7 @@ module.exports.run = async (bot, msg, args) => {
     const headers = {
       "accept-language": "en-UK",
       "user-agent":
-        "Mozilla/5.0 OWo"
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
     };
     const Search = await fetch(url, { headers });
     const html = await Search.text();
@@ -82,7 +84,7 @@ module.exports.run = async (bot, msg, args) => {
     var title = $('.g').find(`h3[class="LC20lb DKV0Md"]`).first().text() ;
     var description = $(`span[class="hgKElc"]`).text() || $(".mod").find('span[class="hgKElc"]').text() || $(`.zCubwf`).first().text() || $(`.kno-rdesc`).text().replace("Description", "").replace("― Google", "") || $(`span[class="aCOpRe"]`).first().text() || $(`span[class="hgKElc"]`).first().text() || $(`span[class="ILfuVd NA6bn"]`).find(`span[class="hgKElc"]`).first().text();
     var url = $('.yuRUbf').find('a').first().attr('href');
-    if (url.length === 0) {
+    if (!url) {
       await db.set(`Google_search_${args.join(" ")}`, { time: Date.now(), items: [] });
       msg.channel.send(new Discord.MessageEmbed().setDescription(`I can't find anythings about it.`).setColor("RED"))
     } else {
