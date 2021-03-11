@@ -1,0 +1,37 @@
+{
+  "name": "NIC20",
+  "version": "1.0.0",
+  "description": "A simple Discord bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "chalk": "^4.1.0",
+    "cheerio": "1.0.0-rc.3",
+    "discord-music-player": "^6.3.6",
+    "discord-player": "^1.4.1",
+    "discord-ytdl-core": "^4.0.8",
+    "discord.js": "^12.5.1",
+    "enmap": "^5.2.4",
+    "express": "^4.17.1",
+    "ffmpeg-static": "4.2.7",
+    "ms": "^2.1.2",
+    "node-fetch": "^2.6.1",
+    "quick.db": "^7.1.1",
+    "quickmongo": "^3.0.0",
+    "random-puppy": "^1.1.0",
+    "request": "^2.88.2",
+    "simple-youtube-api": "^5.2.1",
+    "superagent": "^6.1.0",
+    "time-stamp": "^2.2.0",
+    "yt-search": "^2.5.2",
+    "ytdl-core": "^4.4.4",
+    "ytsr": "^3.2.3"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "license": "MIT",
+}
