@@ -24,7 +24,7 @@ module.exports.run = async (client, message, args) => {
     const headers = {
       "accept-language": " en-UK",
       "user-agent":
-        "Mozilla/5.0 OWo"
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
     };
     const searchresult = await fetch(url, { headers });
     const text = await searchresult.text();
@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args) => {
     } else {
       message.channel.send(new Discord.MessageEmbed().setImage(result[Math.floor(Math.random() * result.length)]).setDescription(Date.now() - bf).setColor("RANDOM"));
     };
-    async function rand(text, argsl, i) {
+    async function rand(text, argsl, i, bot) {
       var webcd = `Image_Search_`;
       if (message.channel.nsfw) var webcd = `Image_Search_nsfw_`;
       const $ = await cheerio.load(text);
@@ -68,8 +68,8 @@ module.exports.run = async (client, message, args) => {
       };
     };
     async function APIs(argsu, bot) {
-      var cx = bot.config.custom_search_cx;
-      var key = bot.config.customsearch_api_key;
+      var cx = client.config.custom_search_cx;
+      var key = client.config.customsearch_api_key;
       if(key.length === 0) return 0;
       if (!message.channel.nsfw) var url = `https://www.googleapis.com/customsearch/v1?key=${key[Math.floor(Math.random() * key.length)]}&cx=${cx[Math.floor(Math.random() * cx.length)]}&q=${encodeURIComponent(argsu)}&safe=off&num=10&searchType=image`;
       if (message.channel.nsfw) var url = `https://www.googleapis.com/customsearch/v1?key=${key[Math.floor(Math.random() * key.length)]}&cx=${cx[Math.floor(Math.random() * cx.length)]}&q=${encodeURIComponent(argsu)}&num=10&searchType=image&safe=active`;
